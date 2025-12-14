@@ -47,5 +47,23 @@ class Controller:
         self._view.page.update()
 
     """Implementare la parte di ricerca del cammino minimo"""
+    def handle_cammino_minimo(self, e):
+        try:
+            soglia = float(self._view.txt_soglia.value)
+        except:
+            self._view.show_alert("Inserisci un numero valido per la soglia.")
+
+        nodi = self._model.get_edges_min_weight(soglia)
+        self._view.lista_visualizzazione_3.controls.clear()
+        self._view.lista_visualizzazione_3.controls.append(ft.Text(f"Cammino minimo:\n"))
+        if nodi != []:
+            for i in range(len(nodi)-1):
+                print(f'Arco {i}: {nodi[i]}, {nodi[i+1]}')
+                peso_arco = self._model.G[nodi[i]][nodi[i+1]]["peso"]
+                self._view.lista_visualizzazione_3.controls.append(ft.Text(f"{nodi[i]} ---> {nodi[i+1]}  [{peso_arco:.2f}]"))
+        else:
+            print('Percorso vuoto')
+            self._view.lista_visualizzazione_3.controls.clear()
+        self._view.page.update()
     # TODO
 
