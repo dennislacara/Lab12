@@ -53,7 +53,10 @@ class Controller:
         except:
             self._view.show_alert("Inserisci un numero valido per la soglia.")
 
-        nodi = self._model.get_edges_min_weight(soglia)
+        #con NX
+        nodi = self._model.cammino_minimo(soglia)
+        #con Ricorsione
+        #nodi = self._model.cammino_minimo_ricorsione(soglia)
         self._view.lista_visualizzazione_3.controls.clear()
         self._view.lista_visualizzazione_3.controls.append(ft.Text(f"Cammino minimo:\n"))
         if nodi != []:
